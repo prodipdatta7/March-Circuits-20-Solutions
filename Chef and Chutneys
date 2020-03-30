@@ -83,7 +83,6 @@ int convToNum(string str){
         int ch = (str[i] - 'a');
         num ^= (pw[ch]);
     }
-   // cout<<"its "<<num<<endl;
     return num;
 }
 vector<int> createVector(int num){
@@ -100,7 +99,6 @@ void build(int node , int l , int r){
     if(l > r) return;
     if(l == r){
         segTree[node] = arr[l];
-       // cout<<"ok for node "<<node<<"  "<<arr[l].numOfVectors<<endl;
         return;
     }
     int mid = (l + r) / 2;
@@ -112,7 +110,6 @@ void build(int node , int l , int r){
 Node query(int node , int l , int r , int ql , int qr){
     if(l > r || l > qr || r < ql) return emptyNode;
     if(l >= ql && r <= qr){
-       // cout<<"reached here "<<node<<"  "<<l<<"  "<<r<<" "<<endl;
         return segTree[node];
     }
     int mid = (l + r) / 2;
@@ -139,11 +136,6 @@ void update(int node , int l , int r , int point , int val){
 ll calculateAns(Node node, int span){
     int numOfVectors = node.numOfVectors;
     vector<int> basis = node.basisVector;
-    /*cout<<"calculating ans "<<numOfVectors<<endl;
-    for(int i = 0 ; i < 26 ; i++){
-        cout<<basis[i]<<" ";
-    }
-    cout<<endl;*/
     ll ans = 0;
  
     for(int i = 0 ; i < 27 ; i++){
@@ -215,12 +207,6 @@ int main(){
             Node result = query(1 , 1 , n , L , R);
  
             vector<int> here = result.basisVector;
-            /*cout<<"here nums "<<result.numOfVectors<<endl;
-            for(int i = 0 ; i < 26 ; i++){
-                cout<<here[i]<<" ";
-            }
-            cout<<endl;
-*/
             ll ans = calculateAns(result, R - L + 1);
             ans--;
             printf("%lld\n" , ans);
